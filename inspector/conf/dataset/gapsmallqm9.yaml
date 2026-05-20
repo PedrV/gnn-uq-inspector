@@ -1,0 +1,7 @@
+name: gapsmallqm9
+type: regression
+version: original
+embeddings_path: null
+task_type: graph
+is_large: false
+target: distribution

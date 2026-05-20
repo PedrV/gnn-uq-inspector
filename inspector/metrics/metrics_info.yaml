@@ -1,0 +1,59 @@
+chameleon:
+    main_metric: RMSE
+    other_metrics:
+        - R2
+    metric_directions:
+        RMSE: min
+        R2: max
+        Diagonal NLL: min
+        Full NLL: min
+
+pems:
+    main_metric: RMSE
+    other_metrics:
+        - R2
+    metric_directions:
+        RMSE: min
+        Diagonal NLL: min
+        Full NLL: min
+        R2: max
+
+gapsmallqm9:
+    main_metric: RMSE
+    other_metrics:
+    metric_directions:
+        RMSE: min
+        Diagonal NLL: min
+        Full NLL: min
+
+cora:
+    main_metric: Accuracy
+    other_metrics:
+    metric_directions:
+        Accuracy: max
+        NLL: min
+
+citeseer:
+    main_metric: Accuracy
+    other_metrics:
+    metric_directions:
+        Accuracy: max
+        NLL: min
+
+tolokers2:
+    main_metric: AP
+    other_metrics:
+        - Accuracy
+    metric_directions:
+        AP: max
+        Accuracy: max
+        NLL: min
+
+artnetviews:
+    main_metric: R2
+    other_metrics:
+        - RMSE
+    metric_directions:
+        R2: max
+        RMSE: min
+        NLL: min

@@ -1,0 +1,10 @@
+do_train: true
+do_nll: true
+do_uq: true
+do_extra: true
+do_residuals: false
+is_trivial: false
+is_bayesian: false
+epoch: null
+validation_logic: "validation_loss"  # loss
+load_run_dir: null  # Hydra run path of the stats that will be calculated. Only necessary if calc happens after train exits

@@ -1,0 +1,3 @@
+name: many_rep
+num_repetitions: 3
+num_models: 50

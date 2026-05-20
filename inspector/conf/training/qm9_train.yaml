@@ -1,0 +1,7 @@
+name: qm9_train
+epochs: 500
+lr: 0.001
+weight_decay: 0
+scheduler: false
+batch_size: 128
+init_scheme: xavier

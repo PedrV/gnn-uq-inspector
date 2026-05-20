@@ -1,0 +1,9 @@
+name: gcngraph
+hidden_dim: 128
+num_layers: 4
+jk: null
+act: "relu"
+patience: null
+grace_period: null
+dropout: 0.1
+num_end_layers: 2

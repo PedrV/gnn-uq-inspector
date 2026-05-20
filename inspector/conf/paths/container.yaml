@@ -1,0 +1,8 @@
+root_data_path: ./datasets
+root_entropy_path: ./entropy
+root_embeddings_path: ./h5files
+
+data_path: null
+entropy_path: null
+stats_path: null
+h5_path: null

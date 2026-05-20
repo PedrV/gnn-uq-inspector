@@ -1,0 +1,7 @@
+name: cora
+type: classification
+version: original
+embeddings_path: null
+task_type: node
+is_large: false
+target: null

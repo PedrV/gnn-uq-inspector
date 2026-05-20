@@ -1,0 +1,7 @@
+name: gcn
+hidden_dim: 20
+num_layers: 2
+jk: null
+act: "relu"
+patience: null
+grace_period: 1000

@@ -1,0 +1,6 @@
+name: graphland
+epochs: 1000
+lr: 0.0003
+weight_decay: 0
+scheduler: false
+init_scheme: he

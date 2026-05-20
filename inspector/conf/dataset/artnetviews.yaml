@@ -1,0 +1,7 @@
+name: artnetviews
+type: regression
+version: original
+embeddings_path: null
+task_type: node
+is_large: true
+target: distribution

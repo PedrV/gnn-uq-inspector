@@ -1,0 +1,9 @@
+name: megagat
+hidden_dim: 512
+num_layers: 3
+jk: null
+act: "gelu"
+patience: null
+grace_period: null
+heads: 4
+dropout: 0.1

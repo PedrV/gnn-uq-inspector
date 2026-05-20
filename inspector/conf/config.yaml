@@ -1,0 +1,22 @@
+defaults:
+  - _self_
+  - paths: local
+  - training: base_train
+  - metrics: standard
+  - logging: base_log
+  - repetition: base_rep
+  - task: base_task
+  - dataset: pems
+  - model: gcn
+
+master_seed: 7777  # was 1111
+
+hydra:
+  run:
+    dir: ./outputs/${dataset.name}/${dataset.version}/${model.name}/${hydra.job.name}_${now:%Y-%m-%d_%H-%M-%S}
+  job:
+    name: "${random_name:}"
+
+experiment:
+  description: "Inspector"
+  debug: false

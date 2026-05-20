@@ -1,0 +1,7 @@
+name: chameleon
+type: regression
+version: binary_features_logarithmic_target
+embeddings_path: null
+task_type: node
+is_large: false
+target: distribution

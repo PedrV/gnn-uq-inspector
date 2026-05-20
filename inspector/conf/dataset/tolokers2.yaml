@@ -1,0 +1,7 @@
+name: tolokers2
+type: classification
+version: original
+embeddings_path: null
+task_type: node
+is_large: true
+target: null

@@ -1,0 +1,9 @@
+name: gat
+hidden_dim: 128
+num_layers: 3
+jk: null
+act: "gelu"
+patience: null
+grace_period: null
+heads: [4, 4, 1]
+dropout: 0.1
