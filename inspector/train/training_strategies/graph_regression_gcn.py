@@ -1,4 +1,5 @@
 import torch
+import numpy as np
 
 from torch_geometric.loader import DataLoader
 
@@ -360,7 +361,7 @@ class GraphRegressionGCNTask(DeterministicTrainingTask):
                 _l = total_test_seen_examples
             if "train" in k:
                 _l = total_train_seen_examples
-            metrics[k] = torch.sqrt(rmse_metrics[k] / _l).item()
+            metrics[k] = np.sqrt(rmse_metrics[k] / _l)
 
         if len(all_test_embeddings) != 0:
             concatenated_reps_test = [
