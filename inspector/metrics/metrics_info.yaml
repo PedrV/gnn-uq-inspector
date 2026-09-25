@@ -57,3 +57,12 @@ artnetviews:
         R2: max
         RMSE: min
         NLL: min
+
+molhiv:
+    main_metric: ROCAUC
+    other_metrics:
+        - Accuracy
+    metric_directions:
+        ROCAUC: max
+        Accuracy: max
+        NLL: min

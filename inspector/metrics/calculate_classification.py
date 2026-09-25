@@ -10,6 +10,7 @@ from inspector.metrics.metrics import (
     confidence_set_coverage,
     multiclass_calibration_error,
     average_precision,
+    roc_auc,
 )
 
 from inspector.metrics.store_and_print import (
@@ -22,6 +23,7 @@ from inspector.metrics.calculate_metrics_base import BaseMetricsComputation
 _METRIC_FN_MAP = {
     "Accuracy": (compute_accuracy, False),
     "AP": (average_precision, False),
+    "ROCAUC": (roc_auc, False),
 }
 
 
@@ -67,7 +69,7 @@ class ClassificationMetrics(BaseMetricsComputation):
         self, pred, y_true, test_mask, train_mask, val_mask
     ):
         test_metric, train_metric = 0, 0
-        if not self.baseline:
+        if not self.baseline and not self.best_baseline:
             test_metric = self._compute_metric(
                 self.main_metric, pred[test_mask], y_true[test_mask]
             )
@@ -75,9 +77,7 @@ class ClassificationMetrics(BaseMetricsComputation):
                 self.main_metric, pred[train_mask], y_true[train_mask]
             )
             # squeeze() has no effect if last dim > 1 so it does not affect multiclass
-            nll_test = classification_nll(
-                pred[test_mask].squeeze(), y_true[test_mask]
-            )
+            nll_test = classification_nll(pred[test_mask].squeeze(), y_true[test_mask])
         else:
             nll_test = classification_nll(
                 pred[:, test_mask, :].squeeze(), y_true[test_mask]
@@ -224,11 +224,13 @@ class ClassificationMetrics(BaseMetricsComputation):
 
         if metric_name == "Accuracy":
             preds_transformed = (
-                pred.argmax(dim=1) if is_multiclass else (pred > 0.5).type(torch.long).squeeze(-1)
+                pred.argmax(dim=1)
+                if is_multiclass
+                else (pred > 0.5).type(torch.long).squeeze(-1)
             )
             return metric_fn(preds_transformed, y_true)
 
-        if metric_name == "AP" and not is_multiclass:
+        if (metric_name == "AP" and not is_multiclass) or metric_name == "ROCAUC":
             return metric_fn(pred.squeeze(), y_true)
 
         return None

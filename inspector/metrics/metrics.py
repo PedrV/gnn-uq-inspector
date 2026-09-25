@@ -1,7 +1,7 @@
 import torch
 import numpy as np
 
-from sklearn.metrics import average_precision_score, r2_score
+from sklearn.metrics import average_precision_score, r2_score, roc_auc_score
 
 
 def cov_per_dim(x, dim: int = 2, out_dim: int = 0):
@@ -17,6 +17,17 @@ def cov_per_dim(x, dim: int = 2, out_dim: int = 0):
         result[:, :, i] = torch.cov(_x)
 
     return result
+
+
+def roc_auc(pred_y, y):
+    if isinstance(pred_y, torch.Tensor):
+        pred_y = pred_y.numpy()
+    if isinstance(y, torch.Tensor):
+        y = y.numpy()
+
+    assert y.shape == pred_y.shape
+
+    return roc_auc_score(y_true=y, y_score=pred_y)
 
 
 def average_precision(pred_y, y):

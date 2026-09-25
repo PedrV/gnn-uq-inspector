@@ -20,6 +20,7 @@ from torch_geometric.data import InMemoryDataset
 from torch_geometric.datasets import Planetoid
 
 from inspector.data.pems_dataset import PEMS
+from inspector.data.molhiv_dataset import MolHIV
 from inspector.data.tolokers2_dataset import Tolokers2
 from inspector.data.artnetviews_dataset import ArtnetViews
 from inspector.data.smallqm9_dataset import GapSmallQM9
@@ -87,6 +88,10 @@ def get_base_dataset(cfg):
         if version in ("shift_original"):
             print("'Progressive' shift being used!")
             return ArtnetViews(path, pre_transform=StandardizeOutput(), make_shift=True)
+
+    if name == "molhiv":
+        if version == "original":
+            return MolHIV(path)
 
     raise ValueError(f"Unknown dataset {name} or version {version}")
 

@@ -99,8 +99,8 @@ for DS in $DATASETS
         case molhiv
             run_job "./run_in_container.fish $DEVICE 1 train paths=container dataset=molhiv \
                 logging=no_forced \
-                repetition.num_models=10 \
-                repetition.num_repetitions=5 \
+                repetition.num_models=1 \
+                repetition.num_repetitions=2 \
                 training=molhiv_train \
                 model=molginegraph"
 

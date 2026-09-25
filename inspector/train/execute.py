@@ -7,6 +7,7 @@ from .training_strategies import (
     node_classification_gcn,
     node_regression_gcn,
     graph_regression_gcn,
+    graph_classification_gine,
 )
 
 from ..models.model_factory import get_model
@@ -57,6 +58,17 @@ def execute_generic(cfg, expname, dataset, seeds, device):
         else:
             criterion = torch.nn.GaussianNLLLoss()
 
+    elif cfg.dataset.name in ("molhiv"):
+        if cfg.model.name == "molginegraph":
+            task_strategy = graph_classification_gine.GraphClassificationGINETask(
+                seed=seeds[-1],
+                device=device,
+                batch_size=cfg.training.batch_size,
+            )
+        else:
+            raise NotImplementedError(f"Unknown model: {cfg.model.name}")
+        criterion = torch.nn.BCEWithLogitsLoss()
+
     else:
         raise ValueError(f"Unknown task type, {cfg.dataset.name}")
 
@@ -79,14 +91,27 @@ def execute_generic(cfg, expname, dataset, seeds, device):
 
         scfact = None
         if cfg.training.scheduler:
-            scfact = SchedulerFactory(
-                cls=torch.optim.lr_scheduler.ReduceLROnPlateau,
-                kwargs={
-                    "mode": "min",
-                    "factor": cfg.training.scheduler_decay_factor,
-                    "patience": cfg.training.scheduler_patience,
-                },
-            )
+            scheduler_type = cfg.training.scheduler_type  # e.g. "plateau" or "step"
+
+            if scheduler_type == "plateau":
+                scfact = SchedulerFactory(
+                    cls=torch.optim.lr_scheduler.ReduceLROnPlateau,
+                    kwargs={
+                        "mode": "min",
+                        "factor": cfg.training.scheduler_decay_factor,
+                        "patience": cfg.training.scheduler_patience,
+                    },
+                )
+            elif scheduler_type == "step":
+                scfact = SchedulerFactory(
+                    cls=torch.optim.lr_scheduler.StepLR,
+                    kwargs={
+                        "step_size": cfg.training.lr_step_size,
+                        "gamma": cfg.training.gamma,
+                    },
+                )
+            else:
+                raise ValueError(f"Unknown scheduler_type: {scheduler_type!r}")
 
         trainer = UnifiedTrainer(
             data=dataset,

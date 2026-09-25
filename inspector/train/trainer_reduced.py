@@ -174,12 +174,13 @@ class UnifiedTrainer:
 
             epoch_print_mod_value = epochs // 10 
             pbar = tqdm(range(1, epochs + 1))
+            step_per_batch = getattr(self.scheduler, "_step_per_batch", False)
             for epoch in pbar:
 
                 # _start_time = datetime.datetime.now()
                 # --- STRATEGY: Train Step ---
                 loss = self.task.train_epoch(
-                    self.model, self.optimizer, self.criterion, self.data
+                    self.model, self.optimizer, self.criterion, self.data, self.scheduler if step_per_batch else None,
                 )
                 # _total_time = datetime.datetime.now() - _start_time
                 # train_epoch_times.append(_total_time.total_seconds())
@@ -203,7 +204,7 @@ class UnifiedTrainer:
                 if validation_logic != "loss":
                     val_variable = step_metrics["validation_loss"]
 
-                if self.scheduler is not None:
+                if self.scheduler is not None and not step_per_batch:
                     self.scheduler_factory.step(self.scheduler, metric=val_variable)
 
                 # --- IN-MEMORY SAVING LOGIC FOR BEST EPOCH ---

@@ -1,0 +1,13 @@
+name: molhiv_train
+
+epochs: 10
+init_scheme: he
+batch_size: 32
+
+lr: 0.001
+weight_decay: 1e-6
+
+scheduler: true
+scheduler_type: step
+lr_step_size: 10
+gamma: 0.707

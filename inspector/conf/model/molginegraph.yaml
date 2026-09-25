@@ -1,0 +1,9 @@
+name: molginegraph
+hidden_dim: 64
+num_layers: 2
+jk: null
+act: "relu"
+patience: 50
+grace_period: null
+dropout: 0.525
+gine_mlp_num_layers: 2

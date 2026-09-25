@@ -2,6 +2,7 @@ from .gcn import GCNModel, GCNModelGraphWide
 from .gat import GATModel
 from .mega_gat import MegaGATModel
 from .mega_gcn import MegaGCNModel
+from .molecular_gine import MolecularGINE
 
 from .registry import get_model_from_registry
 
