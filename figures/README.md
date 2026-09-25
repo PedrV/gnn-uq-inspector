@@ -32,7 +32,7 @@ python make_plots_raw_metrics.py --type nll --misc_type soup --datasets tolokers
 
 python make_plots_raw_metrics.py --type nll --misc_type normal --datasets chameleon artnetviews gapsmallqm9
 
-python make_plots_raw_metrics.py --type nll --misc_type normal --datasets tolokers2 cora citeseer
+python make_plots_raw_metrics.py --type nll --misc_type normal --datasets tolokers2 cora citeseer molhiv
 
 python make_plots_raw_metrics.py --type nll --misc_type normal --datasets chameleon artnetviews gapsmallqm9
 
@@ -46,7 +46,7 @@ python make_plots.py --datasets artnetviews chameleon gapsmallqm9 --type nll
 
 python make_plots.py --datasets artnetviews chameleon gapsmallqm9 --type point
 
-python make_plots_new_nll.py --datasets cora citeseer tolokers2
+python make_plots_new_nll.py --datasets cora citeseer tolokers2 molhiv
 
 python make_plots_new_nll.py --datasets chameleon artnetviews gapsmallqm9
 ```

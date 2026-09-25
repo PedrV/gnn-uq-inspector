@@ -105,6 +105,15 @@ for DS in "${DATASETS[@]}"; do
                 model=megagat"
             ;;
 
+        molhiv)
+            run_job "./run_in_container.fish $DEVICE 1 train paths=container dataset=molhiv \
+                logging=no_forced \
+                repetition.num_models=10 \
+                repetition.num_repetitions=5 \
+                training=molhiv_train \
+                model=molginegraph"
+            ;;
+        
         *)
             echo "Warning: unknown dataset '$DS' — skipped"
             ;;

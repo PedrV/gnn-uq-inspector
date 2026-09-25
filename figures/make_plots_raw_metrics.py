@@ -7,7 +7,7 @@ from pathlib import Path
 
 DATASET_TYPE = {
     "regression": ("pems", "artnetviews", "chameleon", "gapsmallqm9"),
-    "classification": ("cora", "citeseer", "tolokers2")
+    "classification": ("cora", "citeseer", "tolokers2", "molhiv")
 }
 
 oscwd = Path(os.getcwd())
@@ -19,7 +19,8 @@ EXPERIMENTS_STORAGE = {
     "gapsmallqm9": "gapsmallqm9/original/gcngraph/gareth_2026-04-02_15-42-55",
     "cora": "cora/original/gcn/perceval_2026-03-02_15-34-05",
     "citeseer": "citeseer/original/gcn/arthur_2026-03-02_18-27-00",
-    "tolokers2": "tolokers2/original/megagat/mordred_2026-03-27_19-04-29"
+    "tolokers2": "tolokers2/original/megagat/mordred_2026-03-27_19-04-29",
+    "molhiv": "molhiv/original/molginegraph/dragon_2026-05-16_14-38-22" 
 }
 EXPERIMENTS_STORAGE_BASE = f"{oscwd.parent.parent / "do_figures"}/outputs"
 
@@ -59,6 +60,13 @@ datasets_nll = {
     }, 
     "tolokers2": {
         "dataset_dirs": [f'{build_dir_string("tolokers2", "")}'],
+        "point_metric": "Accuracy Test",
+        "uq_compare_metric": "NLL",
+        "models": ["stats_uq_total", "stats_individual"],
+        "models_size": ["5", "5"],
+    },
+    "molhiv": {
+        "dataset_dirs": [f'{build_dir_string("molhiv", "")}'],
         "point_metric": "Accuracy Test",
         "uq_compare_metric": "NLL",
         "models": ["stats_uq_total", "stats_individual"],

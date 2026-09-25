@@ -5,13 +5,13 @@ import re
 
 from pathlib import Path
 
-import numpy as np
+import math
 
 OOD = False
 
 DATASET_TYPE = {
     "regression": ("pems", "artnetviews", "chameleon", "gapsmallqm9"),
-    "classification": ("cora", "citeseer", "tolokers2")
+    "classification": ("cora", "citeseer", "tolokers2", "molhiv")
 }
 
 oscwd = Path(os.getcwd())
@@ -24,6 +24,7 @@ DATASET_SIZE = {
     "gapsmallqm9": 818,
     "artnetviews": 12791,
     "tolokers2": 1, # 2974,
+    "molhiv": 1,
 }
 
 EXPERIMENTS_STORAGE = {
@@ -33,7 +34,8 @@ EXPERIMENTS_STORAGE = {
     "gapsmallqm9": "gapsmallqm9/original/gcngraph/gareth_2026-04-02_15-42-55",
     "cora": "cora/original/gcn/perceval_2026-03-02_15-34-05",
     "citeseer": "citeseer/original/gcn/arthur_2026-03-02_18-27-00",
-    "tolokers2": "tolokers2/original/megagat/mordred_2026-03-27_19-04-29"
+    "tolokers2": "tolokers2/original/megagat/mordred_2026-03-27_19-04-29",
+    "molhiv": "molhiv/original/molginegraph/dragon_2026-05-16_14-38-22"
 }
 
 EXPERIMENTS_STORAGE_OOD = {
@@ -67,6 +69,10 @@ datasets_nll = {
     }, 
     "tolokers2": {
         "dataset_dirs": [f'{build_dir_string("tolokers2", "stats_uq_total")}'],
+        "uq_compare_metric": "NLL",
+    },
+    "molhiv": {
+        "dataset_dirs": [f'{build_dir_string("molhiv", "stats_uq_total")}'],
         "uq_compare_metric": "NLL",
     },
     "pems": {
@@ -104,9 +110,9 @@ datasets_nll_ood = {
 
 baselines = {
     # 1,2,3: https://arxiv.org/abs/1612.01474; 4: https://arxiv.org/pdf/2006.10108
-    "classification_nll": [f"ImageNet, Inception={np.exp(0.17)}", f"MNIST, MLP={np.exp(0.08)}", f"SVHN, VGG={np.exp(0.15)}", f"CIFAR10, ResNet={np.exp(0.208)}"],
+    "classification_nll": [f"ImageNet, Inception={math.exp(0.17)}", f"MNIST, MLP={math.exp(0.08)}", f"SVHN, VGG={math.exp(0.15)}", f"CIFAR10, ResNet={math.exp(0.208)}"],
     # 1: https://arxiv.org/abs/2403.05600, 2: https://arxiv.org/abs/1612.01474
-    "regression_nll": [f"NYUdepthV2, UNet={np.exp(0.1920)}"],
+    "regression_nll": [f"NYUdepthV2, UNet={math.exp(0.1920)}"],
     "mixed_nll": []
 }
 

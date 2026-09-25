@@ -69,7 +69,6 @@ for DS in $DATASETS
                 training=graphland \
                 model=megagcn"
 
-
         case tolokers2
             run_job "./run_in_container.fish $DEVICE 1 train paths=container dataset=tolokers2 \
                 logging=no_forced \
@@ -96,6 +95,14 @@ for DS in $DATASETS
                 training=graphland \
                 training.epochs=250 \
                 model=megagat"
+       
+        case molhiv
+            run_job "./run_in_container.fish $DEVICE 1 train paths=container dataset=molhiv \
+                logging=no_forced \
+                repetition.num_models=10 \
+                repetition.num_repetitions=5 \
+                training=molhiv_train \
+                model=molginegraph"
 
         case '*'
             echo "Warning: unknown dataset '$DS' — skipped"
